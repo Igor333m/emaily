@@ -5,4 +5,6 @@ app.get('/', (requst, response) => {
     response.send({hello: 'world'});
 });
 
-app.listen(5000);
+// listen for Heroku environment variable PORT
+const PORT = process.env.PORT || 5000;
+app.listen(PORT);
