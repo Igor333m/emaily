@@ -1,7 +1,7 @@
 const express = require('express'),
     passport = require('passport'),
     GoogleStrategy = require('passport-google-oauth20').Strategy,
-    keys = require('./config/keys');
+    keys = require('../config/keys');
 
 const app = express();
 
@@ -12,7 +12,11 @@ passport.use(new GoogleStrategy({
     }, (accessToken) => {
         console.log("index / accessToken: ", accessToken);
     })
-); 
+);
+
+app.get('/auth/google', passport.authenticate('google', {
+    scope: ['profile', 'email']
+}));
 
 // listen for Heroku environment variable PORT
 const PORT = process.env.PORT || 5000;
